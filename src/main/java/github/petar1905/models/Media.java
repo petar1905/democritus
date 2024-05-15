@@ -11,4 +11,8 @@ public class Media {
     private @Getter int quantity;
     // TODO: Image field
     // TODO: Setters that also change value in database.
+
+    public Media(int id) {
+        // TODO: Query database for extra info and throw exception if not found
+    }
 }
