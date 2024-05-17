@@ -5,7 +5,7 @@ CREATE TABLE media_details (
     year INT,
     genre VARCHAR(25),
     description VARCHAR(255),
-    quantity INT NOT NULL,
+    quantity INT,
     picture MEDIUMBLOB,
     FOREIGN KEY (media_id) REFERENCES media(id)
 );
