@@ -17,10 +17,9 @@ public class User {
     private @Getter String gsmNumber;
     private @Getter String address;
     private @Getter String description;
-    // TODO: Setters that also change value in database.
 
     public User(int id) throws SQLException, UserNotFoundException, IOException {
-        String queryPath = "sql/queries/database_operations/select_user.sql";
+        String queryPath = "sql/queries/database_operations/users/select_one.sql";
         String query = IO.getInstance().readFile(queryPath);
         Database db = Database.getInstance();
         PreparedStatement statement = db.connection.prepareStatement(query);
@@ -38,5 +37,46 @@ public class User {
             this.address = result.getString(4);
             this.description = result.getString(5);
         }
+    }
+
+    private void setStringInDB(String queryPath, String newValue) throws SQLException, IOException {
+        String baseDirectory = "sql/queries/database_operations/users";
+        queryPath = String.format("%s/%s", baseDirectory, queryPath);
+        String query = IO.getInstance().readFile(queryPath);
+        Database db = Database.getInstance();
+        PreparedStatement statement = db.connection.prepareStatement(query);
+        statement.setString(1, newValue);
+        statement.setInt(2, id);
+        statement.executeUpdate();
+    }
+
+    public void setName(String name) throws IOException, SQLException {
+        String queryPath = "set_name.sql";
+        this.setStringInDB(queryPath, name);
+        this.name = name;
+    }
+
+    public void setEGNNumber(String egnNumber) throws IOException, SQLException {
+        String queryPath = "set_egn_number.sql";
+        this.setStringInDB(queryPath, egnNumber);
+        this.egnNumber = egnNumber;
+    }
+
+    public void setGSMNumber(String gsmNumber) throws IOException, SQLException {
+        String queryPath = "set_gsm_number.sql";
+        this.setStringInDB(queryPath, gsmNumber);
+        this.gsmNumber = gsmNumber;
+    }
+
+    public void setAddress(String address) throws IOException, SQLException {
+        String queryPath = "set_address.sql";
+        this.setStringInDB(queryPath, address);
+        this.address = address;
+    }
+
+    public void setDescription(String description) throws IOException, SQLException {
+        String queryPath = "set_description.sql";
+        this.setStringInDB(queryPath, description);
+        this.description = description;
     }
 }
