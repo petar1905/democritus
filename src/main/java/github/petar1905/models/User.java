@@ -19,7 +19,7 @@ public class User {
     private @Getter String description;
 
     public User(int id) throws SQLException, UserNotFoundException, IOException {
-        String queryPath = "sql/queries/database_operations/users/select_one.sql";
+        String queryPath = "sql/queries/database_operations/users/select_user.sql";
         String query = IO.getInstance().readFile(queryPath);
         Database db = Database.getInstance();
         PreparedStatement statement = db.connection.prepareStatement(query);
