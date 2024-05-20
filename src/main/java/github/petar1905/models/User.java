@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 import github.petar1905.auxillary.classes.Database;
 import github.petar1905.auxillary.classes.IO;
-import github.petar1905.exceptions.UserNotFoundException;
+import github.petar1905.exceptions.UserException;
 
 public class User {
     private @Getter int id;
@@ -18,7 +18,22 @@ public class User {
     private @Getter String address;
     private @Getter String description;
 
-    public User(int id) throws SQLException, UserNotFoundException, IOException {
+    public User() throws SQLException, IOException, UserException {
+        String queryPath = "sql/queries/database_operations/users/insert_user.sql";
+        String query = IO.getInstance().readFile(queryPath);
+        Database db = Database.getInstance();
+        PreparedStatement statement = db.connection.prepareStatement(query);
+        ResultSet result = statement.executeQuery();
+        if (result.next()) {
+            this.id = result.getInt(1);
+        } else {
+            String format = "Unknown error. LAST_INSERT_ID in transaction: %d";
+            String msg = String.format(format, result.getInt(1));
+            throw new UserException(msg);
+        }
+    }
+
+    public User(int id) throws SQLException, UserException, IOException {
         String queryPath = "sql/queries/database_operations/users/select_user.sql";
         String query = IO.getInstance().readFile(queryPath);
         Database db = Database.getInstance();
@@ -28,7 +43,7 @@ public class User {
         if (!result.next()) {
             String format = "User ID %d not found.";
             String msg = String.format(format, id);
-            throw new UserNotFoundException(msg);
+            throw new UserException(msg);
         } else {
             this.id = id;
             this.name = result.getString(1);
