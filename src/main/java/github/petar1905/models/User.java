@@ -79,4 +79,18 @@ public class User {
         this.setStringInDB(queryPath, description);
         this.description = description;
     }
+
+    public void delete() throws IOException, SQLException, UserException {
+        String queryPath = "sql/queries/database_operations/users/delete_user.sql";
+        String query = IO.getInstance().readFile(queryPath);
+        Database db = Database.getInstance();
+        PreparedStatement statement = db.connection.prepareStatement(query);
+        statement.setInt(1, id);
+        int result = statement.executeUpdate();
+        if (result != 1) {
+            String format = "Unknown error. Cannot delete ID %d";
+            String msg = String.format(format, id);
+            throw new UserException(msg);
+        }
+    }
 }
