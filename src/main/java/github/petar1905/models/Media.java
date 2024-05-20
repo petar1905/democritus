@@ -5,10 +5,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import github.petar1905.auxillary.classes.Database;
 import github.petar1905.auxillary.classes.IO;
+import github.petar1905.auxillary.classes.Model;
+import github.petar1905.auxillary.interfaces.Deletable;
 import github.petar1905.exceptions.MediaException;
 import lombok.Getter;
 
-public class Media {
+public class Media extends Model implements Deletable {
     private @Getter int id;
     private @Getter String name;
     private @Getter String author;
@@ -19,6 +21,7 @@ public class Media {
     // TODO: Image field
 
     public Media() throws SQLException, IOException, MediaException {
+        deletedMsg = "This Media instance is already deleted.";
         String queryPath = "sql/queries/database_operations/media/insert_media.sql";
         String query = IO.getInstance().readFile(queryPath);
         Database db = Database.getInstance();
@@ -34,6 +37,7 @@ public class Media {
     }
 
     public Media(int id) throws SQLException, MediaException, IOException {
+        deletedMsg = "This Media instance is already deleted.";
         String queryPath = "sql/queries/database_operations/media/select_media.sql";
         String query = IO.getInstance().readFile(queryPath);
         Database db = Database.getInstance();
@@ -77,37 +81,43 @@ public class Media {
         statement.executeUpdate();
     }
 
-    public void setName(String name) throws IOException, SQLException {
+    public void setName(String name) throws IOException, SQLException, MediaException {
+        if (getDisabledStatus()) throw new MediaException(deletedMsg);
         String queryPath = "set_name.sql";
         this.setStringInDB(queryPath, name);
         this.name = name;
     }
 
-    public void setAuthor(String author) throws IOException, SQLException {
+    public void setAuthor(String author) throws IOException, SQLException, MediaException {
+        if (getDisabledStatus()) throw new MediaException(deletedMsg);
         String queryPath = "set_author.sql";
         this.setStringInDB(queryPath, author);
         this.author = author;
     }
 
-    public void setGenre(String genre) throws IOException, SQLException {
+    public void setGenre(String genre) throws IOException, SQLException, MediaException {
+        if (getDisabledStatus()) throw new MediaException(deletedMsg);
         String queryPath = "set_genre.sql";
         this.setStringInDB(queryPath, author);
         this.genre = genre;
     }
     
-    public void setDescription(String description) throws IOException, SQLException {
+    public void setDescription(String description) throws IOException, SQLException, MediaException {
+        if (getDisabledStatus()) throw new MediaException(deletedMsg);
         String queryPath = "set_description.sql";
         this.setStringInDB(queryPath, description);
         this.description = description;
     }
 
-    public void setYear(int year) throws IOException, SQLException {
+    public void setYear(int year) throws IOException, SQLException, MediaException {
+        if (getDisabledStatus()) throw new MediaException(deletedMsg);
         String queryPath = "set_year.sql";
         this.setIntInDB(queryPath, year);
         this.year = year;
     }
 
     public void delete() throws IOException, SQLException, MediaException {
+        if (getDisabledStatus()) throw new MediaException(deletedMsg);
         String queryPath = "sql/queries/database_operations/media/delete_media.sql";
         String query = IO.getInstance().readFile(queryPath);
         Database db = Database.getInstance();
@@ -119,6 +129,13 @@ public class Media {
             String msg = String.format(format, id);
             throw new MediaException(msg);
         }
+        this.disable();
+        this.id = 0;
+        this.quantity = 0;
+        this.year = 0;
+        this.name = null;
+        this.genre = null;
+        this.description = null;
+        this.author = null;
     }
-    // TODO: Make deleted instances unusable
 }

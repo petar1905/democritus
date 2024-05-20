@@ -6,10 +6,12 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import github.petar1905.auxillary.classes.Database;
 import github.petar1905.auxillary.classes.IO;
+import github.petar1905.auxillary.classes.Model;
+import github.petar1905.auxillary.interfaces.Deletable;
 import github.petar1905.exceptions.RentException;
 import lombok.Getter;
 
-public class Rent {
+public class Rent extends Model implements Deletable {
     private @Getter int id;
     private @Getter Media media;
     private @Getter User user;
@@ -17,10 +19,12 @@ public class Rent {
     private @Getter Timestamp endDate;
 
     public Rent(int userId, int mediaId) {
+        deletedMsg = "This Rent instance is already deleted.";
         // TODO: Query database for extra info and throw exception if not found
     }
 
     public Rent(int userId, int mediaId, Timestamp startDate, Timestamp endDate) throws SQLException, IOException {
+        deletedMsg = "This Rent instance is already deleted.";
         String queryPath = "sql/queries/database_operations/rents/insert_rent.sql";
         String query = IO.getInstance().readFile(queryPath);
         Database db = Database.getInstance();
@@ -33,6 +37,7 @@ public class Rent {
     }
 
     public void delete() throws IOException, SQLException, RentException {
+        if (getDisabledStatus()) throw new RentException(deletedMsg);
         String queryPath = "sql/queries/database_operations/rents/delete_rent.sql";
         String query = IO.getInstance().readFile(queryPath);
         Database db = Database.getInstance();
@@ -44,6 +49,11 @@ public class Rent {
             String msg = String.format(format, id);
             throw new RentException(msg);
         }
-        // TODO: Make deleted instances unusable
+        this.id = 0;
+        this.user = null;
+        this.media = null;
+        this.startDate = null;
+        this.endDate = null;
+        this.disable();
     }
 }
