@@ -121,4 +121,5 @@ public class Media {
             throw new MediaException(msg);
         }
     }
+    // TODO: Make deleted instances unusable
 }

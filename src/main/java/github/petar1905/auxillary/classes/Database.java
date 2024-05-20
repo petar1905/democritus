@@ -9,7 +9,7 @@ public class Database {
 
     private Database() throws SQLException {
         connection = DriverManager.getConnection(null, null, null);
-        // TODO: Add settings
+        // TODO: Add settings that can be passed as commandline parameters
     }
 
     public static synchronized Database getInstance() throws SQLException {
@@ -18,4 +18,6 @@ public class Database {
         }
         return singleInstance;
     }
+
+    // TODO: Create methods for initializing database
 }

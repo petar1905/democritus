@@ -44,5 +44,6 @@ public class Rent {
             String msg = String.format(format, id);
             throw new RentException(msg);
         }
+        // TODO: Make deleted instances unusable
     }
 }

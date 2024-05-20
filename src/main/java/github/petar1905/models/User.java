@@ -107,5 +107,6 @@ public class User {
             String msg = String.format(format, id);
             throw new UserException(msg);
         }
+        // TODO: Make deleted instances unusable
     }
 }
