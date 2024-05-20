@@ -19,6 +19,21 @@ public class Media {
     private @Getter int quantity;
     // TODO: Image field
 
+    public Media() throws SQLException, IOException, MediaException {
+        String queryPath = "sql/queries/database_operations/media/insert_media.sql";
+        String query = IO.getInstance().readFile(queryPath);
+        Database db = Database.getInstance();
+        PreparedStatement statement = db.connection.prepareStatement(query);
+        ResultSet result = statement.executeQuery();
+        if (result.next()) {
+            this.id = result.getInt(1);
+        } else {
+            String format = "Unknown error. LAST_INSERT_ID in transaction: %d";
+            String msg = String.format(format, result.getInt(1));
+            throw new MediaException(msg);
+        }
+    }
+
     public Media(int id) throws SQLException, MediaException, IOException {
         String queryPath = "sql/queries/database_operations/media/select_media.sql";
         String query = IO.getInstance().readFile(queryPath);
