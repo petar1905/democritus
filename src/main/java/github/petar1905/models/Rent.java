@@ -42,14 +42,14 @@ public class Rent extends Model implements Deletable {
         }
     }
 
-    public Rent(int userId, int mediaId, Timestamp startDate, Timestamp endDate) throws SQLException, IOException {
+    public Rent(User user, Media media, Timestamp startDate, Timestamp endDate) throws SQLException, IOException {
         deletedMsg = "This Rent instance is already deleted.";
         String queryPath = "sql/queries/database_operations/rents/insert_rent.sql";
         String query = IO.getInstance().readFile(queryPath);
         Database db = Database.getInstance();
         PreparedStatement statement = db.connection.prepareStatement(query);
-        statement.setInt(1, mediaId);
-        statement.setInt(2, userId);
+        statement.setInt(1, user.getId());
+        statement.setInt(2, media.getId());
         statement.setTimestamp(3, startDate);
         statement.setTimestamp(4, endDate);
         statement.executeQuery();
