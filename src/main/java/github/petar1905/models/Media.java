@@ -18,7 +18,6 @@ public class Media {
     private @Getter String description;
     private @Getter int quantity;
     // TODO: Image field
-    // TODO: Setters that also change value in database.
 
     public Media(int id) throws SQLException, MediaException, IOException {
         String queryPath = "sql/queries/database_operations/media/select_media.sql";
@@ -40,5 +39,57 @@ public class Media {
             this.description = result.getString(5);
             this.quantity = result.getInt(6);
         }
+    }
+
+    private void setStringInDB(String queryPath, String newValue) throws SQLException, IOException {
+        String baseDirectory = "sql/queries/database_operations/media";
+        queryPath = String.format("%s/%s", baseDirectory, queryPath);
+        String query = IO.getInstance().readFile(queryPath);
+        Database db = Database.getInstance();
+        PreparedStatement statement = db.connection.prepareStatement(query);
+        statement.setString(1, newValue);
+        statement.setInt(2, id);
+        statement.executeUpdate();
+    }
+
+    private void setIntInDB(String queryPath, int newValue) throws SQLException, IOException {
+        String baseDirectory = "sql/queries/database_operations/media";
+        queryPath = String.format("%s/%s", baseDirectory, queryPath);
+        String query = IO.getInstance().readFile(queryPath);
+        Database db = Database.getInstance();
+        PreparedStatement statement = db.connection.prepareStatement(query);
+        statement.setInt(1, newValue);
+        statement.setInt(2, id);
+        statement.executeUpdate();
+    }
+
+    public void setName(String name) throws IOException, SQLException {
+        String queryPath = "set_name.sql";
+        this.setStringInDB(queryPath, name);
+        this.name = name;
+    }
+
+    public void setAuthor(String author) throws IOException, SQLException {
+        String queryPath = "set_author.sql";
+        this.setStringInDB(queryPath, author);
+        this.author = author;
+    }
+
+    public void setGenre(String genre) throws IOException, SQLException {
+        String queryPath = "set_genre.sql";
+        this.setStringInDB(queryPath, author);
+        this.genre = genre;
+    }
+    
+    public void setDescription(String description) throws IOException, SQLException {
+        String queryPath = "set_description.sql";
+        this.setStringInDB(queryPath, description);
+        this.description = description;
+    }
+
+    public void setYear(int year) throws IOException, SQLException {
+        String queryPath = "set_year.sql";
+        this.setIntInDB(queryPath, year);
+        this.year = year;
     }
 }
