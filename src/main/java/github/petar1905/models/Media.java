@@ -109,7 +109,7 @@ public class Media {
     }
 
     public void delete() throws IOException, SQLException, MediaException {
-        String queryPath = "sql/queries/database_operations/users/delete_media.sql";
+        String queryPath = "sql/queries/database_operations/media/delete_media.sql";
         String query = IO.getInstance().readFile(queryPath);
         Database db = Database.getInstance();
         PreparedStatement statement = db.connection.prepareStatement(query);
