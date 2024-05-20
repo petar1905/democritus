@@ -8,8 +8,10 @@ public class Database {
     public Connection connection;
 
     private Database() throws SQLException {
-        connection = DriverManager.getConnection(null, null, null);
-        // TODO: Add settings that can be passed as commandline parameters
+        String host = System.getenv("HOST");
+        String user = System.getenv("USER");
+        String password = System.getenv("PASSWORD");
+        connection = DriverManager.getConnection(host, user, password);
     }
 
     public static synchronized Database getInstance() throws SQLException {
