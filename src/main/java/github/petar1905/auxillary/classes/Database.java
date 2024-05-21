@@ -1,6 +1,8 @@
 package github.petar1905.auxillary.classes;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class Database {
@@ -23,5 +25,23 @@ public class Database {
         return singleInstance;
     }
 
-    // TODO: Create methods for initializing database
+    private void executeUpdate(String queryPath) throws SQLException, IOException {
+        String baseDirectory = "sql/queries/database_init";
+        queryPath = String.format("%s/%s", baseDirectory, queryPath);
+        String query = IO.getInstance().readFile(queryPath);
+        PreparedStatement ps = getInstance().connection.prepareStatement(query);
+        ps.executeUpdate();
+    }
+
+    public void initializeDatabase() throws SQLException, IOException {
+        executeUpdate("create_user_table.sql");
+        executeUpdate("create_user_name_index.sql");
+        executeUpdate("create_user_details_table.sql");
+        executeUpdate("create_media_table.sql");
+        executeUpdate("create_media_details_table.sql");
+        executeUpdate("create_quantity_trigger.sql");
+        executeUpdate("create_rent_table.sql");
+        executeUpdate("create_rent_decrement_trigger.sql");
+        executeUpdate("create_rent_increment_trigger.sql");
+    }
 }
