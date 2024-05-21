@@ -11,7 +11,9 @@ public class Database {
         String host = System.getenv("HOST");
         String user = System.getenv("USER");
         String password = System.getenv("PASSWORD");
-        connection = DriverManager.getConnection(host, user, password);
+        String url = String.format("jdbc:mariadb://%s:3306/democritus?user=%s&password=%s", host, user, password);
+        connection = DriverManager.getConnection(url);
+        //connection = DriverManager.getConnection(host, user, password);
     }
 
     public static synchronized Database getInstance() throws SQLException {
