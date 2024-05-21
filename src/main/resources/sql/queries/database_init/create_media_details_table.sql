@@ -1,6 +1,4 @@
-USE democritus;
-
-CREATE TABLE media_details (
+CREATE TABLE IF NOT EXISTS media_details (
     media_id INT NOT NULL UNIQUE,
     year INT,
     genre VARCHAR(25),

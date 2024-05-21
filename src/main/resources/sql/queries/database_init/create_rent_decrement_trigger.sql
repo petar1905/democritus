@@ -1,0 +1,1 @@
+CREATE TRIGGER IF NOT EXISTS decrement_quantity_after_insert AFTER INSERT ON rents FOR EACH ROW BEGIN UPDATE media_details SET quantity = quantity - 1 WHERE media_id = NEW.media_id; END; 

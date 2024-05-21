@@ -1,0 +1,1 @@
+CREATE TRIGGER IF NOT EXISTS increment_quantity_after_delete AFTER DELETE ON rents FOR EACH ROW BEGIN UPDATE media_details SET quantity = quantity + 1 WHERE media_id = OLD.media_id; END;
