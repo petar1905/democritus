@@ -1,4 +1,2 @@
-USE democritus;
-
-CREATE INDEX index_username
+CREATE INDEX IF NOT EXISTS index_username
 ON users (name);

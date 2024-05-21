@@ -1,6 +1,4 @@
-USE democritus;
-
-CREATE TABLE users (
+CREATE TABLE IF NOT EXISTS users (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    name VARCHAR(25) NOT NULL,
+    name VARCHAR(25)
 );

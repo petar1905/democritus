@@ -24,11 +24,17 @@ public class User extends Model implements Deletable {
         String queryPath = "sql/queries/database_operations/users/insert_user.sql";
         String query = IO.getInstance().readFile(queryPath);
         Database db = Database.getInstance();
-        PreparedStatement statement = db.connection.prepareStatement(query);
-        ResultSet result = statement.executeQuery();
+        db.connection.setAutoCommit(false);
+        PreparedStatement insertUpdate = db.connection.prepareStatement(query);
+        insertUpdate.executeUpdate();
+        PreparedStatement lastInsertId = db.connection.prepareStatement("SELECT LAST_INSERT_ID()");
+        ResultSet result = lastInsertId.executeQuery();
         if (result.next()) {
             this.id = result.getInt(1);
+            db.connection.commit();
+            db.connection.setAutoCommit(true);
         } else {
+            db.connection.setAutoCommit(true);
             String format = "Unknown error. LAST_INSERT_ID in transaction: %d";
             String msg = String.format(format, result.getInt(1));
             throw new UserException(msg);
