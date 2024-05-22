@@ -22,7 +22,7 @@ public class UserTest
      * @throws IOException 
      */
     @Test
-    public void testUsers () throws IOException, UserException, SQLException
+    public void testUsers() throws IOException, UserException, SQLException
     {
         Database.getInstance().initializeDatabase();
         User user = new User();

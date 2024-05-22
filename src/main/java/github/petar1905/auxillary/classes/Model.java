@@ -1,5 +1,4 @@
 package github.petar1905.auxillary.classes;
-
 import lombok.Getter;
 
 public abstract class Model {

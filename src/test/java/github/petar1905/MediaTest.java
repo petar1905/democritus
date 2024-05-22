@@ -32,8 +32,9 @@ public class MediaTest
             media.setName("Under the Yoke");
             media.setDescription("UTY Description");
             media.setAuthor("Ivan Vazov");
+            media.setGenre("Novel");
             media.setYear(1893);
-    
+
             Media media2 = new Media(media.getId());
             boolean descriptionsMatch = media.getDescription().equals(media2.getDescription());
             boolean namesMatch = media.getName().equals(media2.getName());
