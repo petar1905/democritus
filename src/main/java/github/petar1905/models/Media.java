@@ -25,11 +25,17 @@ public class Media extends Model implements Deletable {
         String queryPath = "sql/queries/database_operations/media/insert_media.sql";
         String query = IO.getInstance().readFile(queryPath);
         Database db = Database.getInstance();
-        PreparedStatement statement = db.connection.prepareStatement(query);
-        ResultSet result = statement.executeQuery();
+        db.connection.setAutoCommit(false);
+        PreparedStatement mediaStatement = db.connection.prepareStatement(query);
+        mediaStatement.executeUpdate();
+        PreparedStatement lastInsertId = db.connection.prepareStatement("SELECT LAST_INSERT_ID()");
+        ResultSet result = lastInsertId.executeQuery();
         if (result.next()) {
             this.id = result.getInt(1);
+            db.connection.commit();
+            db.connection.setAutoCommit(true);
         } else {
+            db.connection.setAutoCommit(true);
             String format = "Unknown error. LAST_INSERT_ID in transaction: %d";
             String msg = String.format(format, result.getInt(1));
             throw new MediaException(msg);
