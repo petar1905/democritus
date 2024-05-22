@@ -40,6 +40,11 @@ public class Media extends Model implements Deletable {
             String msg = String.format(format, result.getInt(1));
             throw new MediaException(msg);
         }
+        String mediaDetailsQueryPath = "sql/queries/database_operations/media/insert_media_details.sql";
+        String mediaDetailsQuery = IO.getInstance().readFile(mediaDetailsQueryPath);
+        PreparedStatement mediaDetailsStatement = db.connection.prepareStatement(mediaDetailsQuery);
+        mediaDetailsStatement.setInt(1, id);
+        mediaDetailsStatement.executeUpdate();
     }
 
     public Media(int id) throws SQLException, MediaException, IOException {
@@ -104,7 +109,7 @@ public class Media extends Model implements Deletable {
     public void setGenre(String genre) throws IOException, SQLException, MediaException {
         if (getDisabledStatus()) throw new MediaException(deletedMsg);
         String queryPath = "set_genre.sql";
-        this.setStringInDB(queryPath, author);
+        this.setStringInDB(queryPath, genre);
         this.genre = genre;
     }
     

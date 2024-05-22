@@ -1,0 +1,1 @@
+INSERT INTO media_details (media_id) VALUES (?);
