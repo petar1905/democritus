@@ -1,11 +1,8 @@
 SELECT
-i.name,
-i.author,
-j.year
-j.genre,
-j.description,
-j.quantity
-FROM media i WHERE id = ?
-LEFT JOIN media_details j ON j.user_id = i.id;
+name, author, year, genre,
+description, quantity
+FROM media
+LEFT JOIN media_details ON media_id = id
+WHERE id = ?;
 
 /* TODO Select image */
