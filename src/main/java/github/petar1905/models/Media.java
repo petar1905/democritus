@@ -127,6 +127,13 @@ public class Media extends Model implements Deletable {
         this.year = year;
     }
 
+    public void setQuantity(int quantity) throws IOException, SQLException, MediaException {
+        if (getDisabledStatus()) throw new MediaException(deletedMsg);
+        String queryPath = "set_quantity.sql";
+        this.setIntInDB(queryPath, quantity);
+        this.quantity = quantity;
+    }
+
     public void delete() throws IOException, SQLException, MediaException {
         if (getDisabledStatus()) throw new MediaException(deletedMsg);
         String queryPath = "sql/queries/database_operations/media/delete_media.sql";
