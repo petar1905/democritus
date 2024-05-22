@@ -34,6 +34,7 @@ public class MediaTest
             media.setAuthor("Ivan Vazov");
             media.setGenre("Novel");
             media.setYear(1893);
+            media.setQuantity(15);
 
             Media media2 = new Media(media.getId());
             boolean descriptionsMatch = media.getDescription().equals(media2.getDescription());
@@ -41,9 +42,11 @@ public class MediaTest
             boolean authorsMatch = media.getAuthor().equals(media2.getAuthor());
             boolean yearsMatch = media.getYear() == media2.getYear();
             boolean genresMatch = media.getGenre().equals(media2.getGenre());
-            // TODO update quantity
-            boolean everythingMatch = (descriptionsMatch && namesMatch && authorsMatch && yearsMatch && genresMatch); 
-            assertTrue(everythingMatch);
+            assertTrue(descriptionsMatch);
+            assertTrue(namesMatch);
+            assertTrue(authorsMatch);
+            assertTrue(yearsMatch);
+            assertTrue(genresMatch);
         } catch (Exception e) {
             e.printStackTrace();
         }

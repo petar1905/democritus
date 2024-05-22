@@ -38,7 +38,11 @@ public class UserTest
         boolean egnNumbersMatch = user.getEgnNumber().equals(user2.getEgnNumber());
         boolean gsmNumbersMatch = user.getGsmNumber().equals(user2.getGsmNumber());
         boolean addressesMatch = user.getAddress().equals(user2.getAddress());
-        boolean everythingMatch = (descriptionsMatch && namesMatch && egnNumbersMatch && gsmNumbersMatch && addressesMatch); 
-        assertTrue(everythingMatch);
+        assertTrue(descriptionsMatch);
+        assertTrue(namesMatch);
+        assertTrue(egnNumbersMatch);
+        assertTrue(gsmNumbersMatch);
+        assertTrue(addressesMatch);
+
     }
 }
