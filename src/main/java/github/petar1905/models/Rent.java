@@ -47,12 +47,29 @@ public class Rent extends Model implements Deletable {
         String queryPath = "sql/queries/database_operations/rents/insert_rent.sql";
         String query = IO.getInstance().readFile(queryPath);
         Database db = Database.getInstance();
+        db.connection.setAutoCommit(false);
         PreparedStatement statement = db.connection.prepareStatement(query);
         statement.setInt(1, user.getId());
         statement.setInt(2, media.getId());
-        statement.setTimestamp(3, startDate);
-        statement.setTimestamp(4, endDate);
-        statement.executeQuery();
+        statement.setDate(3, startDate);
+        statement.setDate(4, endDate);
+        statement.executeUpdate();
+        PreparedStatement lastInsertId = db.connection.prepareStatement("SELECT LAST_INSERT_ID()");
+        ResultSet result = lastInsertId.executeQuery();
+        if (result.next()) {
+            db.connection.commit();
+            db.connection.setAutoCommit(true);
+        } else {
+            db.connection.setAutoCommit(true);
+            String format = "Unknown error. LAST_INSERT_ID in transaction: %d";
+            String msg = String.format(format, result.getInt(1));
+            throw new RentException(msg);
+        }
+        this.id = result.getInt(1);
+        this.media = media;
+        this.user = user;
+        this.startDate = startDate;
+        this.endDate = endDate;
     }
 
     public void delete() throws IOException, SQLException, RentException {
