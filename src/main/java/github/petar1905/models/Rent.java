@@ -1,10 +1,10 @@
 package github.petar1905.models;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import github.petar1905.auxillary.classes.Database;
 import github.petar1905.auxillary.classes.IO;
 import github.petar1905.auxillary.classes.Model;
@@ -18,8 +18,8 @@ public class Rent extends Model implements Deletable {
     private @Getter int id;
     private @Getter Media media;
     private @Getter User user;
-    private @Getter Timestamp startDate;
-    private @Getter Timestamp endDate;
+    private @Getter Date startDate;
+    private @Getter Date endDate;
 
     public Rent(int id) throws SQLException, MediaException, IOException, RentException, UserException {
         deletedMsg = "This Rent instance is already deleted.";
@@ -37,12 +37,12 @@ public class Rent extends Model implements Deletable {
             this.id = id;
             this.media = new Media(result.getInt(1));
             this.user = new User(result.getInt(2));
-            this.startDate = result.getTimestamp(3);
-            this.endDate = result.getTimestamp(4);
+            this.startDate = result.getDate(3);
+            this.endDate = result.getDate(4);
         }
     }
 
-    public Rent(User user, Media media, Timestamp startDate, Timestamp endDate) throws SQLException, IOException {
+    public Rent(User user, Media media, Date startDate, Date endDate) throws SQLException, IOException, RentException {
         deletedMsg = "This Rent instance is already deleted.";
         String queryPath = "sql/queries/database_operations/rents/insert_rent.sql";
         String query = IO.getInstance().readFile(queryPath);
