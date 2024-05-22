@@ -1,3 +1,3 @@
-UPDATE media_details
+UPDATE media
 SET author = ?
-WHERE media_id = ?;
+WHERE id = ?;
