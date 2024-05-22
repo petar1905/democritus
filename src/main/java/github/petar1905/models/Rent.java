@@ -23,7 +23,7 @@ public class Rent extends Model implements Deletable {
 
     public Rent(int id) throws SQLException, MediaException, IOException, RentException, UserException {
         deletedMsg = "This Rent instance is already deleted.";
-        String queryPath = "sql/queries/database_operations/users/select_user.sql";
+        String queryPath = "sql/queries/database_operations/rents/select_rent.sql";
         String query = IO.getInstance().readFile(queryPath);
         Database db = Database.getInstance();
         PreparedStatement statement = db.connection.prepareStatement(query);
