@@ -1,0 +1,1 @@
+UPDATE user_details SET description = ? WHERE user_id = ?

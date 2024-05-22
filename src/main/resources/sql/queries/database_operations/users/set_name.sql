@@ -1,3 +1,1 @@
-UPDATE users
-SET name = ?
-WHERE id = ?;
+UPDATE users SET name = ? WHERE id = ?
