@@ -25,8 +25,8 @@ public class User extends Model implements Deletable {
         String query = IO.getInstance().readFile(queryPath);
         Database db = Database.getInstance();
         db.connection.setAutoCommit(false);
-        PreparedStatement insertUpdate = db.connection.prepareStatement(query);
-        insertUpdate.executeUpdate();
+        PreparedStatement userStatement = db.connection.prepareStatement(query);
+        userStatement.executeUpdate();
         PreparedStatement lastInsertId = db.connection.prepareStatement("SELECT LAST_INSERT_ID()");
         ResultSet result = lastInsertId.executeQuery();
         if (result.next()) {
@@ -39,6 +39,11 @@ public class User extends Model implements Deletable {
             String msg = String.format(format, result.getInt(1));
             throw new UserException(msg);
         }
+        String userDetailsQueryPath = "sql/queries/database_operations/users/insert_user_details.sql";
+        String userDetailsQuery = IO.getInstance().readFile(userDetailsQueryPath);
+        PreparedStatement userDetailsStatement = db.connection.prepareStatement(userDetailsQuery);
+        userDetailsStatement.setInt(1, id);
+        userDetailsStatement.executeUpdate();
     }
 
     public User(int id) throws SQLException, UserException, IOException {
