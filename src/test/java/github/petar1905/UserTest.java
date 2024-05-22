@@ -1,6 +1,5 @@
 package github.petar1905;
 
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
@@ -23,18 +22,23 @@ public class UserTest
      * @throws IOException 
      */
     @Test
-    public void testDB() throws IOException, UserException
+    public void testUsers () throws IOException, UserException, SQLException
     {
-        try {
-            Database.getInstance().initializeDatabase();
-            User user = new User();
-            user.setName("TestUser");
-            User user2 = new User(user.getId());;
-            assertTrue(user.getId() == user2.getId());
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Database.getInstance().initializeDatabase();
+        User user = new User();
+        user.setName("hey");
+        user.setDescription("hi hru");
+        user.setEGNNumber("12345");
+        user.setGSMNumber("0123456789");
+        user.setAddress("perusha 4");
+        User user2 = new User(user.getId());
+
+        boolean descriptionsMatch = user.getDescription().equals(user2.getDescription());
+        boolean namesMatch = user.getName().equals(user2.getName());
+        boolean egnNumbersMatch = user.getEgnNumber().equals(user2.getEgnNumber());
+        boolean gsmNumbersMatch = user.getGsmNumber().equals(user2.getGsmNumber());
+        boolean addressesMatch = user.getAddress().equals(user2.getAddress());
+        boolean everythingMatch = (descriptionsMatch && namesMatch && egnNumbersMatch && gsmNumbersMatch && addressesMatch); 
+        assertTrue(everythingMatch);
     }
 }
