@@ -10,6 +10,7 @@ public class Database {
     public Connection connection;
 
     private Database() throws SQLException {
+        // TODO Add option for user to input their own database credentials
         String host = System.getenv("HOST");
         String user = System.getenv("USER");
         String password = System.getenv("PASSWORD");
