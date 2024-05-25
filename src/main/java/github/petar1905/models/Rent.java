@@ -22,6 +22,7 @@ public class Rent extends Model implements Deletable {
     private @Getter Date endDate;
 
     public Rent(int id) throws SQLException, MediaException, IOException, RentException, UserException {
+        // Get rid of Rent model and replace it with methods that define a relationship between the User and Media models
         deletedMsg = "This Rent instance is already deleted.";
         String queryPath = "sql/queries/database_operations/rents/select_rent.sql";
         String query = IO.getInstance().readFile(queryPath);
