@@ -1,0 +1,1 @@
+SELECT id FROM media WHERE author LIKE ?
