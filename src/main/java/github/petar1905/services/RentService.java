@@ -89,3 +89,5 @@ public class RentService implements RentServiceMethods {
         return rentList.toArray(rentArray);
     }
 }
+
+// TODO Handle situations in which a user rents the same media several times.
