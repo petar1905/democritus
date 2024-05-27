@@ -2,6 +2,7 @@ package github.petar1905.services;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -19,7 +20,7 @@ import github.petar1905.models.User;
 
 interface RentServiceMethods {
     Rent[] getAllRents() throws IOException, SQLException, MediaException, RentException, UserException;
-    Rent[] getRents(User user);
+    Rent[] getRents(User user) throws IOException, SQLException, MediaException, RentException, UserException;
     Rent[] getRents(Media media);
 }
 
@@ -50,14 +51,24 @@ public class RentService implements RentServiceMethods {
         }
         Rent[] rentArray = new Rent[rentList.size()];
         return rentList.toArray(rentArray);
-        
-
     }
 
     @Override
-    public Rent[] getRents(User user) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getRents'");
+    public Rent[] getRents(User user) throws IOException, SQLException, MediaException, RentException, UserException {
+        String queryPath = "sql/queries/database_operations/rents/select_rents_of_user.sql";
+        String query = IO.getInstance().readFile(queryPath);
+        Connection con = Database.getInstance().connection;
+        PreparedStatement statement = con.prepareStatement(query);
+        statement.setInt(1, user.getId());
+        ResultSet rs = statement.executeQuery();
+        List<Rent> rentList = new ArrayList<>();
+        Rent rent;
+        while (rs.next()) {
+            rent = new Rent(rs.getInt(1));
+            rentList.add(rent);
+        }
+        Rent[] rentArray = new Rent[rentList.size()];
+        return rentList.toArray(rentArray);
     }
 
     @Override
