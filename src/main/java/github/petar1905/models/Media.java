@@ -1,5 +1,6 @@
 package github.petar1905.models;
 import java.io.IOException;
+import java.sql.Blob;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,7 +19,7 @@ public class Media extends Model implements Deletable {
     private @Getter String genre;
     private @Getter String description;
     private @Getter int quantity;
-    // TODO: Image field
+    private @Getter byte[] imageByteData;
 
     public Media() throws SQLException, IOException, MediaException {
         deletedMsg = "This Media instance is already deleted.";
@@ -67,6 +68,8 @@ public class Media extends Model implements Deletable {
             this.genre = result.getString(4);
             this.description = result.getString(5);
             this.quantity = result.getInt(6);
+            Blob imageBlob = result.getBlob(7);
+            this.imageByteData = imageBlob.getBytes(1, (int) imageBlob.length());
         }
     }
 
