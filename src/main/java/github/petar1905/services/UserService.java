@@ -1,7 +1,6 @@
 package github.petar1905.services;
 
 import github.petar1905.models.User;
-
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,7 +9,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-
 import github.petar1905.auxillary.classes.Database;
 import github.petar1905.auxillary.classes.IO;
 import github.petar1905.exceptions.UserException;
