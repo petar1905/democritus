@@ -22,6 +22,17 @@ interface UserServiceMethods {
 }
 
 public class UserService implements UserServiceMethods {
+    private static UserService singleInstance = null;
+
+    private UserService() {}
+
+    public static synchronized UserService getInstance() {
+        if (singleInstance == null) {
+            singleInstance = new UserService();
+        }
+        return singleInstance;
+    }
+
     public User[] getAllUsers() throws SQLException, IOException, UserException {
         User[] users = new User[getAmountOfUsers()];
         String baseDirectory = "sql/queries/database_operations/users";
