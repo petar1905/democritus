@@ -22,6 +22,7 @@ interface RentServiceMethods {
     Rent[] getAllRents() throws IOException, SQLException, MediaException, RentException, UserException;
     Rent[] getRents(User user) throws IOException, SQLException, MediaException, RentException, UserException;
     Rent[] getRents(Media media) throws IOException, SQLException, MediaException, RentException, UserException;
+    Rent[] getRents(User user, Media media) throws IOException, SQLException, MediaException, RentException, UserException;
 }
 
 public class RentService implements RentServiceMethods {
@@ -88,6 +89,23 @@ public class RentService implements RentServiceMethods {
         Rent[] rentArray = new Rent[rentList.size()];
         return rentList.toArray(rentArray);
     }
-}
 
-// TODO Handle situations in which a user rents the same media several times.
+    @Override
+    public Rent[] getRents(User user, Media media) throws IOException, SQLException, MediaException, RentException, UserException {
+        String queryPath = "sql/queries/database_operations/rents/select_rents_of_both_user_and_media.sql";
+        String query = IO.getInstance().readFile(queryPath);
+        Connection con = Database.getInstance().connection;
+        PreparedStatement statement = con.prepareStatement(query);
+        statement.setInt(1, user.getId());
+        statement.setInt(2, media.getId());
+        ResultSet rs = statement.executeQuery();
+        List<Rent> rentList = new ArrayList<>();
+        Rent rent;
+        while (rs.next()) {
+            rent = new Rent(rs.getInt(1));
+            rentList.add(rent);
+        }
+        Rent[] rentArray = new Rent[rentList.size()];
+        return rentList.toArray(rentArray);
+    }
+}

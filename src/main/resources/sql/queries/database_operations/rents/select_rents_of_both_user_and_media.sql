@@ -1,0 +1,1 @@
+SELECT id FROM rents WHERE user_id = ? AND media_id = ?
