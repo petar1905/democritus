@@ -7,7 +7,7 @@ import github.petar1905.models.User;
 interface RentServiceMethods {
     Rent[] getAllRents();
     Rent[] getRents(User user);
-    Rent[] getRenters(Media media);
+    Rent[] getRents(Media media);
 }
 
 public class RentService implements RentServiceMethods {
@@ -35,7 +35,7 @@ public class RentService implements RentServiceMethods {
     }
 
     @Override
-    public Rent[] getRenters(Media media) {
+    public Rent[] getRents(Media media) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getRenters'");
     }
