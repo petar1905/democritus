@@ -4,6 +4,6 @@ CREATE TABLE IF NOT EXISTS media_details (
     genre VARCHAR(25),
     description VARCHAR(255),
     quantity INT,
-    picture MEDIUMBLOB,
+    picture BLOB,
     FOREIGN KEY (media_id) REFERENCES media(id)
 );
