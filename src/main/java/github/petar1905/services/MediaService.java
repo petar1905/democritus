@@ -14,7 +14,25 @@ import github.petar1905.auxillary.classes.IO;
 import github.petar1905.exceptions.MediaException;
 import github.petar1905.models.Media;
 
-public class MediaService {
+interface MediaServiceMethods {
+    Media[] getAllMedia() throws SQLException, IOException, MediaException;
+    Media[] searchByNameRegex(String regex) throws SQLException, IOException, MediaException;
+    Media[] searchByAuthorRegex(String regex) throws SQLException, IOException, MediaException;
+    int getAmountOfMedia() throws SQLException;
+}
+
+public class MediaService implements MediaServiceMethods {
+    private static MediaService singleInstance = null;
+
+    private MediaService() {}
+
+    public static synchronized MediaService getInstance() {
+        if (singleInstance == null) {
+            singleInstance = new MediaService();
+        }
+        return singleInstance;
+    }
+
     public Media[] getAllMedia() throws SQLException, IOException, MediaException {
         Media[] media = new Media[getAmountOfMedia()];
         String baseDirectory = "sql/queries/database_operations/media";
