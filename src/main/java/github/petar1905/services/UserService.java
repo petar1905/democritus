@@ -15,7 +15,13 @@ import github.petar1905.auxillary.classes.Database;
 import github.petar1905.auxillary.classes.IO;
 import github.petar1905.exceptions.UserException;
 
-public class UserService {
+interface UserServiceMethods {
+    User[] getAllUsers() throws SQLException, IOException, UserException;
+    User[] searchByNameRegex(String regex) throws SQLException, IOException, UserException;
+    int getAmountOfUsers() throws SQLException;
+}
+
+public class UserService implements UserServiceMethods {
     public User[] getAllUsers() throws SQLException, IOException, UserException {
         User[] users = new User[getAmountOfUsers()];
         String baseDirectory = "sql/queries/database_operations/users";
