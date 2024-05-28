@@ -1,9 +1,13 @@
 package github.petar1905.models;
 import java.io.IOException;
 import java.sql.Blob;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import javax.sql.rowset.serial.SerialBlob;
+
 import github.petar1905.auxillary.classes.Database;
 import github.petar1905.auxillary.classes.IO;
 import github.petar1905.auxillary.classes.Model;
@@ -137,6 +141,19 @@ public class Media extends Model implements Deletable {
         this.quantity = quantity;
     }
 
+    public void setImage(byte[] imageByteData) throws IOException, SQLException, MediaException {
+        if (getDisabledStatus()) throw new MediaException(deletedMsg);
+        String queryPath = "sql/queries/database_operations/media/set_image.sql";
+        String query = IO.getInstance().readFile(queryPath);
+        Connection con = Database.getInstance().connection;
+        PreparedStatement statement = con.prepareStatement(query);
+        Blob imageBlob = con.createBlob();
+        imageBlob.setBytes(id, imageByteData);
+        statement.setBlob(1, imageBlob);
+        statement.setInt(2, this.getId());
+        statement.executeUpdate();
+    }
+
     public void delete() throws IOException, SQLException, MediaException {
         if (getDisabledStatus()) throw new MediaException(deletedMsg);
         String queryPath = "sql/queries/database_operations/media/delete_media.sql";
@@ -158,5 +175,6 @@ public class Media extends Model implements Deletable {
         this.genre = null;
         this.description = null;
         this.author = null;
+        this.imageByteData = null;
     }
 }

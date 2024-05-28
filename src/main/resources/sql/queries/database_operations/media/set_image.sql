@@ -1,0 +1,1 @@
+UPDATE media_details SET picture = ? WHERE media_id = ?
