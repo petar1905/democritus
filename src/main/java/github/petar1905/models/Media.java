@@ -5,9 +5,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
-import javax.sql.rowset.serial.SerialBlob;
-
 import github.petar1905.auxillary.classes.Database;
 import github.petar1905.auxillary.classes.IO;
 import github.petar1905.auxillary.classes.Model;
