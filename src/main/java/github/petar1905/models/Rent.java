@@ -49,8 +49,8 @@ public class Rent extends Model implements Deletable {
         Database db = Database.getInstance();
         db.connection.setAutoCommit(false);
         PreparedStatement statement = db.connection.prepareStatement(query);
-        statement.setInt(1, user.getId());
-        statement.setInt(2, media.getId());
+        statement.setInt(1, media.getId());
+        statement.setInt(2, user.getId());
         statement.setDate(3, startDate);
         statement.setDate(4, endDate);
         statement.executeUpdate();
