@@ -69,8 +69,12 @@ public class Media extends Model implements Deletable {
             this.genre = result.getString(4);
             this.description = result.getString(5);
             this.quantity = result.getInt(6);
-            Blob imageBlob = result.getBlob(7);
-            this.imageByteData = imageBlob.getBytes(1, (int) imageBlob.length());
+            try {
+                Blob imageBlob = result.getBlob(7);
+                this.imageByteData = imageBlob.getBytes(1, (int) imageBlob.length());
+            } catch(NullPointerException e) {
+                this.imageByteData = null;
+            }
         }
     }
 
