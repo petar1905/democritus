@@ -1,4 +1,4 @@
-package github.petar1905.views;
+package github.petar1905.auxillary.classes;
 
 import javax.swing.*;
 

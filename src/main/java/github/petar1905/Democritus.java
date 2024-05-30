@@ -1,6 +1,6 @@
 package github.petar1905;
-import github.petar1905.views.MainMenuView;
-import github.petar1905.views.View;
+import github.petar1905.auxillary.classes.View;
+import github.petar1905.views.*;
 
 public class Democritus 
 {
