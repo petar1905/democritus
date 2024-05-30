@@ -11,14 +11,11 @@ public class Database {
 
     private Database() throws SQLException {
         try {
-            String host = System.getenv("HOST");
-            if (host == null) host = AppProperties.getInstance().getProperty("host", "127.0.0.1");
-            String user = System.getenv("USER");
-            if (user == null) user = AppProperties.getInstance().getProperty("user", "root");
-            String password = System.getenv("PASSWORD");
-            if (password == null) password = AppProperties.getInstance().getProperty("password", "");
-            String url = String.format("jdbc:mariadb://%s:3306/democritus?user=%s&password=%s", host, user, password);
-            connection = DriverManager.getConnection(url);
+            String host = AppProperties.getInstance().getProperty("host", "127.0.0.1");
+            String user = AppProperties.getInstance().getProperty("user", "root");
+            String password = AppProperties.getInstance().getProperty("password", "");
+            String url = String.format("jdbc:mariadb://%s:3306/democritus", host);
+            connection = DriverManager.getConnection(url, user, password);
         } catch (IOException e) {
             e.printStackTrace();
         }
