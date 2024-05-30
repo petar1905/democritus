@@ -4,6 +4,6 @@ import github.petar1905.auxillary.classes.Field;
 
 public class UsernameField extends Field {
     public UsernameField() {
-        super("Username", "username", "root");
+        super("Username", "user", "root");
     }
 }
