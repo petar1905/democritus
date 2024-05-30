@@ -26,6 +26,9 @@ public class AppProperties {
         return singleInstance;
     }
 
+    public String getProperty(String key, String defaultValue) throws IOException {
+        return props.getProperty(key, defaultValue);
+    }
     public void setProperty(String key, String value) throws IOException {
         this.props.setProperty(key, value);
         this.props.store(new FileWriter(propsPath), "hi");
