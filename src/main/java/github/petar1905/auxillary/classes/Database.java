@@ -10,12 +10,18 @@ public class Database {
     public Connection connection;
 
     private Database() throws SQLException {
-        // TODO Add option for user to input their own database credentials
-        String host = System.getenv("HOST");
-        String user = System.getenv("USER");
-        String password = System.getenv("PASSWORD");
-        String url = String.format("jdbc:mariadb://%s:3306/democritus?user=%s&password=%s", host, user, password);
-        connection = DriverManager.getConnection(url);
+        try {
+            String host = System.getenv("HOST");
+            if (host == null) host = AppProperties.getInstance().getProperty("host", "127.0.0.1");
+            String user = System.getenv("USER");
+            if (user == null) user = AppProperties.getInstance().getProperty("user", "root");
+            String password = System.getenv("PASSWORD");
+            if (password == null) password = AppProperties.getInstance().getProperty("password", "");
+            String url = String.format("jdbc:mariadb://%s:3306/democritus?user=%s&password=%s", host, user, password);
+            connection = DriverManager.getConnection(url);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static synchronized Database getInstance() throws SQLException {
