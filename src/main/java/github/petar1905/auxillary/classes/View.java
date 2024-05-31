@@ -4,26 +4,26 @@ import javax.swing.*;
 
 public class View extends JFrame {
     private JPanel root;
-    private View(JPanel centerPanel) {
+    private View(JPanel leftPanel) {
         super();
         root = new JPanel();
         root.setLayout(new BoxLayout(root, BoxLayout.LINE_AXIS));
-        root.add(centerPanel);
+        root.add(leftPanel);
         root.add(Box.createHorizontalGlue());
         this.add(root);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(600, 600);
     }
 
-    private View(JPanel centerPanel, JPanel secondaryPanel) {
-        this(centerPanel);
-        root.add(secondaryPanel);
+    private View(JPanel leftPanel, JPanel centerPanel) {
+        this(leftPanel);
+        root.add(centerPanel);
         root.add(Box.createHorizontalGlue());
 
     }
 
-    public View(JPanel centerPanel, JPanel leftPanel, JPanel rightPanel) {
-        this(centerPanel, leftPanel);
+    public View(JPanel leftPanel, JPanel centerPanel, JPanel rightPanel) {
+        this(leftPanel, centerPanel);
         root.add(rightPanel);
     }
 }
