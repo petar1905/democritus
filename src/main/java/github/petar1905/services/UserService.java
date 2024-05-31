@@ -32,19 +32,19 @@ public class UserService implements UserServiceMethods {
     }
 
     public User[] getAllUsers() throws SQLException, IOException, UserException {
-        User[] users = new User[getAmountOfUsers()];
+        List<User> users = new ArrayList<>();
         String baseDirectory = "sql/queries/database_operations/users";
         String format = "%s/select_all_users.sql";
         String path = String.format(format, baseDirectory);
         String query = IO.getInstance().readFile(path);
         Connection con = Database.getInstance().connection;
-        Statement statement = con.createStatement();
-        ResultSet rs = statement.executeQuery(query);
-        int selected_index = 0;
+        PreparedStatement statement = con.prepareStatement(query);
+        ResultSet rs = statement.executeQuery();
         while (rs.next()) {
-            users[selected_index++] = new User(rs.getInt(1));
+            users.add(new User(rs.getInt(1)));
         }
-        return users;
+        User[] usersArray = new User[users.size()];
+        return users.toArray(usersArray);
     }
 
     public User[] searchByNameRegex(String regex) throws SQLException, IOException, UserException {
