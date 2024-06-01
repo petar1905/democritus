@@ -1,4 +1,4 @@
-package github.petar1905.views.components.user_list;
+package github.petar1905.views.components.user_panel;
 import java.awt.event.MouseEvent;
 
 import javax.swing.DefaultListModel;
