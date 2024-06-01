@@ -135,4 +135,9 @@ public class User extends Model implements Deletable {
         this.description = null;
         this.address = null;
     }
+
+    @Override
+    public String toString() {
+        return this.name;
+    }
 }
