@@ -6,7 +6,7 @@ import javax.swing.JPanel;
 import github.petar1905.auxillary.classes.View;
 import github.petar1905.exceptions.UserException;
 import github.petar1905.models.User;
-import github.petar1905.views.components.user_list.ScrollableUserList;
+import github.petar1905.views.components.user_list_panel.ScrollableUserList;
 
 public class UserListView extends View {
     public UserListView(User[] users) throws SQLException, IOException, UserException {
