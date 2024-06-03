@@ -26,29 +26,25 @@ public class MediaTest
     @Test
     public void testMedia() throws IOException, SQLException, MediaException
     {
-        try {
-            Database.getInstance().initializeDatabase();
-            Media media = new Media();
-            media.setName("Under the Yoke");
-            media.setDescription("UTY Description");
-            media.setAuthor("Ivan Vazov");
-            media.setGenre("Novel");
-            media.setYear(1893);
-            media.setQuantity(15);
+        Database.getInstance().initializeDatabase();
+        Media media = new Media();
+        media.setName("Under the Yoke");
+        media.setDescription("UTY Description");
+        media.setAuthor("Ivan Vazov");
+        media.setGenre("Novel");
+        media.setYear(1893);
+        media.setQuantity(15);
 
-            Media media2 = new Media(media.getId());
-            boolean descriptionsMatch = media.getDescription().equals(media2.getDescription());
-            boolean namesMatch = media.getName().equals(media2.getName());
-            boolean authorsMatch = media.getAuthor().equals(media2.getAuthor());
-            boolean yearsMatch = media.getYear() == media2.getYear();
-            boolean genresMatch = media.getGenre().equals(media2.getGenre());
-            assertTrue(descriptionsMatch);
-            assertTrue(namesMatch);
-            assertTrue(authorsMatch);
-            assertTrue(yearsMatch);
-            assertTrue(genresMatch);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        Media media2 = new Media(media.getId());
+        boolean descriptionsMatch = media.getDescription().equals(media2.getDescription());
+        boolean namesMatch = media.getName().equals(media2.getName());
+        boolean authorsMatch = media.getAuthor().equals(media2.getAuthor());
+        boolean yearsMatch = media.getYear() == media2.getYear();
+        boolean genresMatch = media.getGenre().equals(media2.getGenre());
+        assertTrue(descriptionsMatch);
+        assertTrue(namesMatch);
+        assertTrue(authorsMatch);
+        assertTrue(yearsMatch);
+        assertTrue(genresMatch);
     }
 }
