@@ -15,5 +15,6 @@ public class UserListView extends View {
             new ScrollableUserList(users),
             EmptyPanel.getInstance().panel
         );
+        this.setTitle("User List");
     }
 }
