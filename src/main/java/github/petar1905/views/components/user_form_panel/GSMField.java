@@ -24,7 +24,7 @@ class GSMUpdateListener extends UserUpdateListener {
         }
     } 
 }
-public class GSMField extends Field {
+class GSMField extends Field {
     public GSMField (User user) {
         super("GSM", user.getGsmNumber());
         this.setListener(new GSMUpdateListener(user, getTextField()));

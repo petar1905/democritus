@@ -24,7 +24,7 @@ class NameUpdateListener extends UserUpdateListener {
     } 
 }
 
-public class NameField extends Field {
+class NameField extends Field {
     public NameField(User user) {
         super("Name", user.getName());
         this.setListener(new NameUpdateListener(user, getTextField()));

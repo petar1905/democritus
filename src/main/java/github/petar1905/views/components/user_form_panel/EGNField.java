@@ -24,7 +24,7 @@ class EGNUpdateListener extends UserUpdateListener {
         }
     } 
 }
-public class EGNField extends Field {
+class EGNField extends Field {
     public EGNField(User user) {
         super("EGN", user.getEgnNumber());
         this.setListener(new EGNUpdateListener(user, getTextField()));

@@ -24,7 +24,7 @@ class AddressUpdateListener extends UserUpdateListener {
         }
     } 
 }
-public class AddressField extends Field {
+class AddressField extends Field {
     public AddressField(User user) {
         super("Address", user.getAddress());
         this.setListener(new AddressUpdateListener(user, getTextField()));
