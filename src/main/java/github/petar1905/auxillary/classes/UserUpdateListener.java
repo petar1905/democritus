@@ -9,6 +9,7 @@ public abstract class UserUpdateListener extends FieldListener {
 
     public UserUpdateListener(User user, JTextField field) {
         super(field);
+        this.user = user;
     }
     
 }
