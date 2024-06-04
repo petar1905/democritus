@@ -4,8 +4,9 @@ import javax.swing.JTextField;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.sql.SQLException;
-import github.petar1905.auxillary.classes.Field;
-import github.petar1905.auxillary.classes.UserUpdateListener;
+
+import github.petar1905.auxillary.classes.swing.Field;
+import github.petar1905.auxillary.classes.swing.listeners.UserUpdateListener;
 import github.petar1905.exceptions.UserException;
 import github.petar1905.models.User;
 
