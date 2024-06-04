@@ -18,7 +18,7 @@ class DescriptionUpdateListener extends UserUpdateListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         try {
-            user.setDescription(field.getText());
+            model.setDescription(field.getText());
         } catch (IOException | SQLException | UserException e1) {
             e1.printStackTrace();
         }

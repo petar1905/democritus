@@ -18,7 +18,7 @@ class EGNUpdateListener extends UserUpdateListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         try {
-            user.setEGNNumber(field.getText());
+            model.setEGNNumber(field.getText());
         } catch (IOException | SQLException | UserException e1) {
             e1.printStackTrace();
         }

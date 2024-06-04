@@ -17,7 +17,7 @@ class NameUpdateListener extends UserUpdateListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         try {
-            user.setName(field.getText());
+            model.setName(field.getText());
         } catch (IOException | SQLException | UserException e1) {
             e1.printStackTrace();
         }

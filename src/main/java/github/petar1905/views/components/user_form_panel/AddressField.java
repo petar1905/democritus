@@ -18,7 +18,7 @@ class AddressUpdateListener extends UserUpdateListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         try {
-            user.setAddress(field.getText());
+            model.setAddress(field.getText());
         } catch (IOException | SQLException | UserException e1) {
             e1.printStackTrace();
         }

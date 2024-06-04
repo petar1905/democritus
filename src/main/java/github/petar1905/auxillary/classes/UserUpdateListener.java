@@ -4,12 +4,9 @@ import javax.swing.JTextField;
 
 import github.petar1905.models.User;
 
-public abstract class UserUpdateListener extends FieldListener {
-    protected User user;
-
+public abstract class UserUpdateListener extends ModelUpdateListener<User> {
     public UserUpdateListener(User user, JTextField field) {
-        super(field);
-        this.user = user;
+        super(user, field);
     }
     
 }

@@ -18,7 +18,7 @@ class GSMUpdateListener extends UserUpdateListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         try {
-            user.setGSMNumber(field.getText());
+            model.setGSMNumber(field.getText());
         } catch (IOException | SQLException | UserException e1) {
             e1.printStackTrace();
         }
