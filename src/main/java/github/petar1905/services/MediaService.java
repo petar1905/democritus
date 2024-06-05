@@ -34,19 +34,19 @@ public class MediaService implements MediaServiceMethods {
     }
 
     public Media[] getAllMedia() throws SQLException, IOException, MediaException {
-        Media[] media = new Media[getAmountOfMedia()];
+        List<Media> media = new ArrayList<>();
         String baseDirectory = "sql/queries/database_operations/media";
         String format = "%s/select_all_media.sql";
         String path = String.format(format, baseDirectory);
         String query = IO.getInstance().readFile(path);
         Connection con = Database.getInstance().connection;
-        Statement statement = con.createStatement();
-        ResultSet rs = statement.executeQuery(query);
-        int selected_index = 0;
+        PreparedStatement statement = con.prepareStatement(query);
+        ResultSet rs = statement.executeQuery();
         while (rs.next()) {
-            media[selected_index++] = new Media(rs.getInt(1));
+            media.add(new Media(rs.getInt(1)));
         }
-        return media;
+        Media[] mediaArray = new Media[media.size()];
+        return media.toArray(mediaArray);
     }
 
     public Media[] searchByNameRegex(String regex) throws SQLException, IOException, MediaException {
