@@ -92,4 +92,9 @@ public class Rent extends Model implements Deletable {
         this.endDate = null;
         this.disable();
     }
+
+    @Override
+    public String toString() {
+        return String.format("%s-%s", user.getName(), media.getName());
+    }
 }

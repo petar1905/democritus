@@ -56,7 +56,7 @@ public class UserService implements UserServiceMethods {
         Connection con = Database.getInstance().connection;
         PreparedStatement statement = con.prepareStatement(query);
         statement.setString(1, regex);
-        ResultSet rs = statement.executeQuery(query);
+        ResultSet rs = statement.executeQuery();
         while (rs.next()) {
             users.add(new User(rs.getInt(1)));
         }

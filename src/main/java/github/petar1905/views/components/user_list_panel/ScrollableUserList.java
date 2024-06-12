@@ -6,5 +6,6 @@ import github.petar1905.models.User;
 public class ScrollableUserList extends ScrollableModelList<User> {
     public ScrollableUserList(User[] users) {
         super(users);
+        this.setListener(new UserListMouseListener(this.getModelList()));
     }
 }

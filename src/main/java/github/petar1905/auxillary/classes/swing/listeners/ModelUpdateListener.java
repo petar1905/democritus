@@ -8,6 +8,5 @@ public abstract class ModelUpdateListener<E> extends FieldListener {
     public ModelUpdateListener(E model, JTextField field) {
         super(field);
         this.model = model;
-    }
-    
+    } 
 }

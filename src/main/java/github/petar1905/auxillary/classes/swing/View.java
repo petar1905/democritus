@@ -11,7 +11,7 @@ public class View extends JFrame {
         root.add(leftPanel);
         root.add(Box.createHorizontalGlue());
         this.add(root);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setSize(600, 600);
         this.setResizable(false);
     }

@@ -9,7 +9,11 @@ class UpdateButton extends JButton {
     public UpdateButton() {
         super("Update");
         this.addActionListener(listener);
+    }
 
+    public UpdateButton(String label) {
+        super(label);
+        this.addActionListener(listener);
     }
 
     public void setListener(ActionListener listener) {

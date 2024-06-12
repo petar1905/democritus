@@ -138,6 +138,6 @@ public class User extends Model implements Deletable {
 
     @Override
     public String toString() {
-        return this.name;
+        return String.format("%d-%s-%s", getId(), getName(), getEgnNumber());
     }
 }

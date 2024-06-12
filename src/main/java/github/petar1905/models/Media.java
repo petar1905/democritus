@@ -178,4 +178,9 @@ public class Media extends Model implements Deletable {
         this.author = null;
         this.imageByteData = null;
     }
+
+    @Override
+    public String toString() {
+        return String.format("%d-%s-%s", getId(), getName(), getAuthor());
+    }
 }
