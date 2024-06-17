@@ -1,7 +1,6 @@
 package github.petar1905.views.components.user_form_panel;
 
 import java.awt.event.ActionEvent;
-import java.io.IOException;
 import java.sql.SQLException;
 import javax.swing.JTextField;
 
@@ -19,7 +18,7 @@ class NameUpdateListener extends UserUpdateListener {
     public void actionPerformed(ActionEvent e) {
         try {
             model.setName(field.getText());
-        } catch (IOException | SQLException | UserException e1) {
+        } catch (SQLException | UserException e1) {
             e1.printStackTrace();
         }
     } 

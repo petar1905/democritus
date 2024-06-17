@@ -33,7 +33,7 @@ public class MediaService implements MediaServiceMethods {
         return singleInstance;
     }
 
-    public Media[] getAllMedia() throws SQLException, IOException, MediaException {
+    public Media[] getAllMedia() throws SQLException, MediaException {
         List<Media> media = new ArrayList<>();
         String baseDirectory = "sql/queries/database_operations/media";
         String format = "%s/select_all_media.sql";

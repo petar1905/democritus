@@ -1,0 +1,6 @@
+CREATE TRIGGER IF NOT EXISTS user_delete
+BEFORE DELETE ON users
+FOR EACH ROW
+BEGIN
+    DELETE FROM user_details WHERE user_id = OLD.id;
+END;

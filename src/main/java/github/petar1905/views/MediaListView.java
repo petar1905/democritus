@@ -1,8 +1,10 @@
 package github.petar1905.views;
 
+import github.petar1905.auxillary.classes.swing.ButtonContainer;
 import github.petar1905.auxillary.classes.swing.EmptyPanel;
 import github.petar1905.auxillary.classes.swing.View;
 import github.petar1905.models.Media;
+import github.petar1905.views.components.media_list_panel.NewMediaButton;
 import github.petar1905.views.components.media_list_panel.ScrollableMediaList;
 
 public class MediaListView extends View {
@@ -10,7 +12,7 @@ public class MediaListView extends View {
         super(
             EmptyPanel.getInstance().panel, 
             new ScrollableMediaList(mediaList), 
-            EmptyPanel.getInstance().panel
+            new ButtonContainer(new NewMediaButton())
         );
         this.setTitle("Media List");
     }

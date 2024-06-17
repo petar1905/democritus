@@ -6,5 +6,6 @@ import github.petar1905.models.Media;
 public class ScrollableMediaList extends ScrollableModelList<Media> {
     public ScrollableMediaList(Media[] media) {
         super(media);
+        this.setListener(new MediaListMouseListener(this.getModelList()));
     }
 }

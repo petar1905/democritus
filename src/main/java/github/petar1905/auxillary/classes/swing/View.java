@@ -12,7 +12,7 @@ public class View extends JFrame {
         root.add(Box.createHorizontalGlue());
         this.add(root);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        this.setSize(600, 600);
+        this.setSize(1024, 768);
         this.setResizable(false);
     }
 

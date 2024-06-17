@@ -19,7 +19,7 @@ public class User extends Model implements Deletable {
     private @Getter String address;
     private @Getter String description;
 
-    public User() throws SQLException, IOException, UserException {
+    public User() throws SQLException, UserException {
         deletedMsg = "This User instance is already deleted.";
         String queryPath = "sql/queries/database_operations/users/insert_user.sql";
         String query = IO.getInstance().readFile(queryPath);
@@ -68,7 +68,7 @@ public class User extends Model implements Deletable {
         }
     }
 
-    private void setStringInDB(String queryPath, String newValue) throws SQLException, IOException {
+    private void setStringInDB(String queryPath, String newValue) throws SQLException {
         String baseDirectory = "sql/queries/database_operations/users";
         queryPath = String.format("%s/%s", baseDirectory, queryPath);
         String query = IO.getInstance().readFile(queryPath);
@@ -79,42 +79,42 @@ public class User extends Model implements Deletable {
         statement.executeUpdate();
     }
 
-    public void setName(String name) throws IOException, SQLException, UserException {
+    public void setName(String name) throws SQLException, UserException {
         if (getDisabledStatus()) throw new UserException(deletedMsg);
         String queryPath = "set_name.sql";
         this.setStringInDB(queryPath, name);
         this.name = name;
     }
 
-    public void setEGNNumber(String egnNumber) throws IOException, SQLException, UserException {
+    public void setEGNNumber(String egnNumber) throws SQLException, UserException {
         if (getDisabledStatus()) throw new UserException(deletedMsg);
         String queryPath = "set_egn_number.sql";
         this.setStringInDB(queryPath, egnNumber);
         this.egnNumber = egnNumber;
     }
 
-    public void setGSMNumber(String gsmNumber) throws IOException, SQLException, UserException {
+    public void setGSMNumber(String gsmNumber) throws SQLException, UserException {
         if (getDisabledStatus()) throw new UserException(deletedMsg);
         String queryPath = "set_gsm_number.sql";
         this.setStringInDB(queryPath, gsmNumber);
         this.gsmNumber = gsmNumber;
     }
 
-    public void setAddress(String address) throws IOException, SQLException, UserException {
+    public void setAddress(String address) throws SQLException, UserException {
         if (getDisabledStatus()) throw new UserException(deletedMsg);
         String queryPath = "set_address.sql";
         this.setStringInDB(queryPath, address);
         this.address = address;
     }
 
-    public void setDescription(String description) throws IOException, SQLException, UserException {
+    public void setDescription(String description) throws SQLException, UserException {
         if (getDisabledStatus()) throw new UserException(deletedMsg);
         String queryPath = "set_description.sql";
         this.setStringInDB(queryPath, description);
         this.description = description;
     }
 
-    public void delete() throws IOException, SQLException, UserException {
+    public void delete() throws SQLException, UserException {
         if (getDisabledStatus()) throw new UserException(deletedMsg);
         String queryPath = "sql/queries/database_operations/users/delete_user.sql";
         String query = IO.getInstance().readFile(queryPath);

@@ -36,6 +36,7 @@ public class Database {
         executeUpdate("create_user_table.sql");
         executeUpdate("create_user_name_index.sql");
         executeUpdate("create_user_details_table.sql");
+        executeUpdate("create_user_delete_trigger.sql");
         executeUpdate("create_media_table.sql");
         executeUpdate("create_media_details_table.sql");
         executeUpdate("create_quantity_trigger.sql");

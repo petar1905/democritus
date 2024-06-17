@@ -22,7 +22,7 @@ public class Media extends Model implements Deletable {
     private @Getter int quantity;
     private @Getter byte[] imageByteData;
 
-    public Media() throws SQLException, IOException, MediaException {
+    public Media() throws SQLException, MediaException {
         deletedMsg = "This Media instance is already deleted.";
         String queryPath = "sql/queries/database_operations/media/insert_media.sql";
         String query = IO.getInstance().readFile(queryPath);
@@ -49,7 +49,7 @@ public class Media extends Model implements Deletable {
         mediaDetailsStatement.executeUpdate();
     }
 
-    public Media(int id) throws SQLException, MediaException, IOException {
+    public Media(int id) throws SQLException, MediaException {
         deletedMsg = "This Media instance is already deleted.";
         String queryPath = "sql/queries/database_operations/media/select_media.sql";
         String query = IO.getInstance().readFile(queryPath);
@@ -155,7 +155,7 @@ public class Media extends Model implements Deletable {
         statement.executeUpdate();
     }
 
-    public void delete() throws IOException, SQLException, MediaException {
+    public void delete() throws SQLException, MediaException {
         if (getDisabledStatus()) throw new MediaException(deletedMsg);
         String queryPath = "sql/queries/database_operations/media/delete_media.sql";
         String query = IO.getInstance().readFile(queryPath);
