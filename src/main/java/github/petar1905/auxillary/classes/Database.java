@@ -10,15 +10,11 @@ public class Database {
     public Connection connection;
 
     private Database() throws SQLException {
-        try {
-            String host = AppProperties.getInstance().getProperty("host", "127.0.0.1");
-            String user = AppProperties.getInstance().getProperty("user", "root");
-            String password = AppProperties.getInstance().getProperty("password", "");
-            String url = String.format("jdbc:mariadb://%s:3306/democritus", host);
-            connection = DriverManager.getConnection(url, user, password);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        String host = AppProperties.getInstance().getProperty("host", "127.0.0.1");
+        String user = AppProperties.getInstance().getProperty("user", "root");
+        String password = AppProperties.getInstance().getProperty("password", "");
+        String url = String.format("jdbc:mariadb://%s:3306/democritus", host);
+        connection = DriverManager.getConnection(url, user, password);
     }
 
     public static synchronized Database getInstance() throws SQLException {
