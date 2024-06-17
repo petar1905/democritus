@@ -19,14 +19,18 @@ public class AppProperties {
         props.load(stream);
     }
 
-    public static synchronized AppProperties getInstance() throws IOException {
+    public static synchronized AppProperties getInstance() {
         if (singleInstance == null) {
-            singleInstance = new AppProperties();
+            try {
+                singleInstance = new AppProperties();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         return singleInstance;
     }
 
-    public String getProperty(String key, String defaultValue) throws IOException {
+    public String getProperty(String key, String defaultValue) {
         return props.getProperty(key, defaultValue);
     }
     public void setProperty(String key, String value) throws IOException {
