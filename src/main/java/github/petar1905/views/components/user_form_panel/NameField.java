@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.sql.SQLException;
 import javax.swing.JTextField;
 
+import github.petar1905.auxillary.classes.Database;
 import github.petar1905.auxillary.classes.swing.Field;
 import github.petar1905.auxillary.classes.swing.listeners.UserUpdateListener;
 import github.petar1905.exceptions.UserException;
@@ -18,6 +19,7 @@ class NameUpdateListener extends UserUpdateListener {
     public void actionPerformed(ActionEvent e) {
         try {
             model.setName(field.getText());
+            Database.getInstance().connection.commit();
         } catch (SQLException | UserException e1) {
             e1.printStackTrace();
         }
@@ -26,7 +28,7 @@ class NameUpdateListener extends UserUpdateListener {
 
 class NameField extends Field {
     public NameField(User user) {
-        super("Name", user.getName());
+        super("Name", user.getName(), true);
         this.setListener(new NameUpdateListener(user, getTextField()));
     }
 }

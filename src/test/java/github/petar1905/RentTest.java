@@ -9,6 +9,7 @@ import java.text.SimpleDateFormat;
 import java.sql.Date;
 import org.junit.Test;
 import github.petar1905.auxillary.classes.Database;
+import github.petar1905.auxillary.classes.DateUtilities;
 import github.petar1905.exceptions.MediaException;
 import github.petar1905.exceptions.RentException;
 import github.petar1905.exceptions.UserException;
@@ -45,8 +46,8 @@ public class RentTest
         User user = new User();
         user.setName("Konstantin");
 
-        Date startDate = dateFrom("21/05/2024");
-        Date endDate = dateFrom("20/06/2024");
+        Date startDate = DateUtilities.dateFrom("2024-05-24");
+        Date endDate = DateUtilities.dateFrom("2024-06-20");
         Rent rent1 = new Rent(user, media, startDate, endDate);
         Rent rent2 = new Rent(rent1.getId());
 
@@ -66,11 +67,5 @@ public class RentTest
         assertTrue(startDateMatch);
         assertTrue(endDateMatch);
 
-    }
-
-    private Date dateFrom(String dateStr) throws ParseException {
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-        java.util.Date date = format.parse("12/06/2024");
-        return new Date(date.getTime());
     }
 }

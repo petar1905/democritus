@@ -4,6 +4,8 @@ import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.sql.SQLException;
 import javax.swing.JTextField;
+
+import github.petar1905.auxillary.classes.Database;
 import github.petar1905.auxillary.classes.swing.Field;
 import github.petar1905.auxillary.classes.swing.listeners.MediaUpdateListener;
 import github.petar1905.exceptions.MediaException;
@@ -18,6 +20,7 @@ class AuthorUpdateListener extends MediaUpdateListener {
     public void actionPerformed(ActionEvent e) {
         try {
             model.setAuthor(field.getText());
+            Database.getInstance().connection.commit();
         } catch (IOException | SQLException | MediaException e1) {
             e1.printStackTrace();
         }
@@ -26,7 +29,7 @@ class AuthorUpdateListener extends MediaUpdateListener {
 
 class AuthorField extends Field {
     public AuthorField(Media media) {
-        super("Author", media.getAuthor());
+        super("Author", media.getAuthor(), true);
         this.setListener(new AuthorUpdateListener(media, getTextField()));
     }
 }

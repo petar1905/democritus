@@ -4,6 +4,7 @@ import javax.swing.JTextField;
 import java.awt.event.ActionEvent;
 import java.sql.SQLException;
 
+import github.petar1905.auxillary.classes.Database;
 import github.petar1905.auxillary.classes.swing.Field;
 import github.petar1905.auxillary.classes.swing.listeners.UserUpdateListener;
 import github.petar1905.exceptions.UserException;
@@ -19,6 +20,7 @@ class EGNUpdateListener extends UserUpdateListener {
     public void actionPerformed(ActionEvent e) {
         try {
             model.setEGNNumber(field.getText());
+            Database.getInstance().connection.commit();
         } catch (SQLException | UserException e1) {
             e1.printStackTrace();
         }
@@ -26,7 +28,7 @@ class EGNUpdateListener extends UserUpdateListener {
 }
 class EGNField extends Field {
     public EGNField(User user) {
-        super("EGN", user.getEgnNumber());
+        super("EGN", user.getEgnNumber(), true);
         this.setListener(new EGNUpdateListener(user, getTextField()));
     }
 }

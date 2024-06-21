@@ -9,14 +9,21 @@ public class Field extends JPanel {
     private UpdateButton updateButton;
     protected @Getter JTextField textField;
 
-    public Field(String labelText, String defaultText) {
+    public Field(String labelText, String defaultText, boolean hasButton) {
         super();
         JLabel label = new JLabel(labelText);
         this.add(label);
         this.textField = new JTextField(defaultText, 16);
         this.add(textField);
         this.updateButton = new UpdateButton();
-        this.add(updateButton);
+
+        if (hasButton) {
+            this.add(updateButton);
+        }
+    }
+
+    public Field(String labelText, String defaultText) {
+        this(labelText, defaultText, false);
     }
 
     public Field(String labelText, ActionListener listener, String defaultText) {
@@ -26,5 +33,9 @@ public class Field extends JPanel {
 
     public void setListener(ActionListener listener) {
         updateButton.setListener(listener);
+    }
+
+    public String getText() {
+        return textField.getText();
     }
 }

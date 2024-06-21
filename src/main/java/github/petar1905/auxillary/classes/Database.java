@@ -15,6 +15,7 @@ public class Database {
         String password = AppProperties.getInstance().getProperty("password", "");
         String url = String.format("jdbc:mariadb://%s:3306/democritus", host);
         connection = DriverManager.getConnection(url, user, password);
+        connection.setAutoCommit(false);
     }
 
     public static synchronized Database getInstance() throws SQLException {
@@ -43,5 +44,8 @@ public class Database {
         executeUpdate("create_rent_table.sql");
         executeUpdate("create_rent_decrement_trigger.sql");
         executeUpdate("create_rent_increment_trigger.sql");
+        executeUpdate("create_media_trigger.sql");
+        executeUpdate("create_user_trigger.sql");
+
     }
 }

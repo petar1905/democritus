@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 
 import java.sql.SQLException;
 
+import github.petar1905.auxillary.classes.Database;
 import github.petar1905.auxillary.classes.swing.Field;
 import github.petar1905.auxillary.classes.swing.listeners.UserUpdateListener;
 import github.petar1905.exceptions.UserException;
@@ -20,6 +21,7 @@ class AddressUpdateListener extends UserUpdateListener {
     public void actionPerformed(ActionEvent e) {
         try {
             model.setAddress(field.getText());
+            Database.getInstance().connection.commit();
         } catch (SQLException | UserException e1) {
             e1.printStackTrace();
         }
@@ -27,7 +29,7 @@ class AddressUpdateListener extends UserUpdateListener {
 }
 class AddressField extends Field {
     public AddressField(User user) {
-        super("Address", user.getAddress());
+        super("Address", user.getAddress(), true);
         this.setListener(new AddressUpdateListener(user, getTextField()));
     }
 }

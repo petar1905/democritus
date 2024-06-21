@@ -58,9 +58,9 @@ public class Rent extends Model implements Deletable {
         ResultSet result = lastInsertId.executeQuery();
         if (result.next()) {
             db.connection.commit();
-            db.connection.setAutoCommit(true);
+            //db.connection.setAutoCommit(true);
         } else {
-            db.connection.setAutoCommit(true);
+            //db.connection.setAutoCommit(true);
             String format = "Unknown error. LAST_INSERT_ID in transaction: %d";
             String msg = String.format(format, result.getInt(1));
             throw new RentException(msg);

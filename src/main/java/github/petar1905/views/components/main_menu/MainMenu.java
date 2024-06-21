@@ -8,7 +8,6 @@ public class MainMenu extends JPanel {
         this.add(new UserPanelButton());
         this.add(new MediaPanelButton());
         this.add(new RentPanelButton());
-        this.add(new ReportPanelButton());
         this.add(new SettingsPanelButton());
     }
 }

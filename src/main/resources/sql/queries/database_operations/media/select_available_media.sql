@@ -1,0 +1,1 @@
+SELECT media_id FROM media_details WHERE quantity > 0

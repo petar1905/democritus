@@ -32,9 +32,9 @@ public class User extends Model implements Deletable {
         if (result.next()) {
             this.id = result.getInt(1);
             db.connection.commit();
-            db.connection.setAutoCommit(true);
+            //db.connection.setAutoCommit(true);
         } else {
-            db.connection.setAutoCommit(true);
+            //db.connection.setAutoCommit(true);
             String format = "Unknown error. LAST_INSERT_ID in transaction: %d";
             String msg = String.format(format, result.getInt(1));
             throw new UserException(msg);

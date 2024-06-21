@@ -1,23 +1,12 @@
 package github.petar1905.views.components.main_menu;
 import java.awt.event.*;
-import java.sql.SQLException;
-
-import github.petar1905.exceptions.MediaException;
-import github.petar1905.models.Media;
-import github.petar1905.services.MediaService;
-import github.petar1905.views.MediaListView;
+import github.petar1905.views.MediaSearchView;
 
 class MediaPanelButtonListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
-        Media[] mediaArray;
-        try {
-            mediaArray = MediaService.getInstance().getAllMedia();
-            MediaListView view = new MediaListView(mediaArray);
-            view.setVisible(true);
-        } catch (SQLException | MediaException e1) {
-            e1.printStackTrace();
-        }
+        MediaSearchView view = new MediaSearchView();
+        view.setVisible(true);
     } 
 }
 

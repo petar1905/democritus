@@ -1,0 +1,1 @@
+CREATE TRIGGER delete_user_trigger BEFORE DELETE ON users FOR EACH ROW BEGIN DELETE FROM user_details WHERE user_id = OLD.id; DELETE FROM rents WHERE user_id = OLD.id; END;

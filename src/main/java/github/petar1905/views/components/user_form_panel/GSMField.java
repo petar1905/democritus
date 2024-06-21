@@ -3,6 +3,8 @@ package github.petar1905.views.components.user_form_panel;
 import javax.swing.JTextField;
 import java.awt.event.ActionEvent;
 import java.sql.SQLException;
+
+import github.petar1905.auxillary.classes.Database;
 import github.petar1905.auxillary.classes.swing.Field;
 import github.petar1905.auxillary.classes.swing.listeners.UserUpdateListener;
 import github.petar1905.exceptions.UserException;
@@ -18,6 +20,7 @@ class GSMUpdateListener extends UserUpdateListener {
     public void actionPerformed(ActionEvent e) {
         try {
             model.setGSMNumber(field.getText());
+            Database.getInstance().connection.commit();
         } catch (SQLException | UserException e1) {
             e1.printStackTrace();
         }
@@ -25,7 +28,7 @@ class GSMUpdateListener extends UserUpdateListener {
 }
 class GSMField extends Field {
     public GSMField(User user) {
-        super("GSM", user.getGsmNumber());
+        super("GSM", user.getGsmNumber(), true);
         this.setListener(new GSMUpdateListener(user, getTextField()));
     }
 }
