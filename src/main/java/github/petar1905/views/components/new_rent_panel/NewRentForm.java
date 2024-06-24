@@ -64,9 +64,9 @@ public class NewRentForm extends JPanel {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         ScrollableMediaList mediaList = new ScrollableMediaList(selectableMedia);
         this.add(mediaList);
-        DateField startDateField = new DateField(false);
+        DateField startDateField = new DateField(false, "Start Date");
         this.add(startDateField);
-        DateField endDateField = new DateField(false);
+        DateField endDateField = new DateField(false, "End Date");
         this.add(endDateField);
         
         JLabel prompt = new JLabel();

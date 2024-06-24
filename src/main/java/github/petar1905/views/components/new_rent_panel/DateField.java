@@ -7,8 +7,8 @@ import github.petar1905.auxillary.classes.DateUtilities;
 import github.petar1905.auxillary.classes.swing.Field;
 
 public class DateField extends Field {
-    public DateField(boolean hasButton) {
-        super("Start Date", "YYYY-MM-DD", hasButton);
+    public DateField(boolean hasButton, String label) {
+        super(label, "YYYY-MM-DD", hasButton);
     }
 
     public Date getDate() throws ParseException {

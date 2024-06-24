@@ -1,13 +1,7 @@
 package github.petar1905.views.components.user_form_panel;
 
 import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import java.awt.event.*;
-import java.sql.SQLException;
-
-import github.petar1905.exceptions.UserException;
 import github.petar1905.models.User;
 
 public class UserForm extends JPanel {

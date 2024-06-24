@@ -10,9 +10,15 @@ public class Database {
     public Connection connection;
 
     private Database() throws SQLException {
-        String host = AppProperties.getInstance().getProperty("host", "127.0.0.1");
-        String user = AppProperties.getInstance().getProperty("user", "root");
-        String password = AppProperties.getInstance().getProperty("password", "");
+        try {
+            Class.forName("org.mariadb.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        AppProperties props = AppProperties.getInstance();
+        String host = props.getProperty("host", "127.0.0.1");
+        String user = props.getProperty("user", "root");
+        String password = props.getProperty("password", "");
         String url = String.format("jdbc:mariadb://%s:3306/democritus", host);
         connection = DriverManager.getConnection(url, user, password);
         connection.setAutoCommit(false);

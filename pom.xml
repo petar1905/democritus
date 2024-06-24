@@ -86,7 +86,7 @@
                 <archive>
                     <manifest>
                         <addClasspath>true</addClasspath>
-                        <mainClass>github.petar1905.App</mainClass>
+                        <mainClass>github.petar1905.Democritus</mainClass>
                     </manifest>
                 </archive>
             </configuration>
